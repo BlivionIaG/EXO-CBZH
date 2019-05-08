@@ -4,6 +4,7 @@ let shoppingListCollection = JSON.parse(localStorage.getItem("shoppingList")) ||
 let addItemToShoppingListForm = document.querySelector("#addItemToShoppingList");   // Shopping item input form location
 let shoppingItemName = document.querySelector("#shoppingItemName");                 // Item name location
 let shoppingList = document.querySelector("#shoppingList");                         // Shopping list location
+let deleteShoppingListItemButton = document.querySelector("#deleteItemButton");     // Delete shopping list item button location
 
 let itemSelected = null;                                                            // Current selected item
 
@@ -14,6 +15,14 @@ addItemToShoppingListForm.addEventListener("submit", (event) => {
         updateShoppingListItem();   // We update it
     }else{
         createShoppingListItem();   // We add it
+    }
+});
+
+deleteShoppingListItemButton.addEventListener("click", (event) =>{
+    if(itemSelected){
+        if(confirm("Do you want to delete the item "+itemSelected.innerHTML+" ?")){
+            deleteShoppingListItem();
+        }
     }
 });
 
@@ -95,5 +104,11 @@ function updateShoppingListItem(){
 }
 
 function deleteShoppingListItem(){
-
+    let itemId = itemSelected.id.split("_")[1];
+    shoppingListCollection.splice(itemId, 1);
+    readShoppingListItem();
+    localStorage.setItem(                       // Replace the list by the one stored in memory
+        "shoppingList", 
+        JSON.stringify(shoppingListCollection)
+    );
 }
