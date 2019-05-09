@@ -111,7 +111,7 @@ function readShoppingListItem(){
                             "shoppingItem list-group-item input-group active"   // On utilise l'attribut "active de bootstrap"
                         );
 
-                        document.querySelector("#addItemSubmitButton")..setAttribute("value", "Modifier");  // Modification de la valeur du bouton
+                        document.querySelector("#addItemSubmitButton").setAttribute("value", "Modifier");  // Modification de la valeur du bouton
                     }
                 }
             );
