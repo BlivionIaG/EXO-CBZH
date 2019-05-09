@@ -26,7 +26,33 @@ deleteShoppingListItemButton.addEventListener("click", (event) =>{
     }
 });
 
+function indexOfItemById(array, id){
+    let i = -1;
+    for (let index = 0; index < array.length; index++) {
+        const element = array[index];
+        if(element.id == id){
+            i = index;
+        }
+    }
+
+    return i;
+}
+
+function searchForHighestIndex(array){
+    let id = -1;
+
+    array.forEach(element => {
+        if(element.id > id){
+            id = element.id;
+        }
+    });
+
+    return id;
+}
+
 function addShopingListItem(item){
+    shoppingList.innerHTML += "<li style=\"list-style-type:none\" type=\"hidden\"></li>";
+
     let liElement = document.createElement("li");                                   // Creates a <li> tag
     liElement.setAttribute("class", "shoppingItem list-group-item input-group");    // Adds class attributes
     liElement.setAttribute("id", "shoppingItem_"+item.id);                          // Adds id attributes
@@ -38,8 +64,8 @@ function addShopingListItem(item){
 
 function createShoppingListItem(){
     let item = {
-        id: shoppingListCollection.length,      // id of the item
-        name: shoppingItemName.value            // name of the item
+        id: searchForHighestIndex(shoppingListCollection)+1,    // id of the item
+        name: shoppingItemName.value                            // name of the item
     };
 
     if(item.name !== ""){                       // If the input fiel isn't empty
@@ -94,7 +120,9 @@ function updateShoppingListItem(){
     };
 
     if(item.name !== ""){                           // If the input fiel isn't empty
-        shoppingListCollection[item.id] = item;     // Add the item to the memory stored list
+        shoppingListCollection[indexOfItemById(     // Add the item to the memory stored list
+            shoppingListCollection, item.id
+        )] = item;     
         readShoppingListItem();                     // Refresh the displayed list
         localStorage.setItem(                       // Replace the list by the one stored in memory
             "shoppingList", 
@@ -105,7 +133,13 @@ function updateShoppingListItem(){
 
 function deleteShoppingListItem(){
     let itemId = itemSelected.id.split("_")[1];
-    shoppingListCollection.splice(itemId, 1);
+
+    shoppingListCollection.splice(
+        indexOfItemById(shoppingListCollection, itemId), 1
+    );
+    
+    itemSelected = null;
+
     readShoppingListItem();
     localStorage.setItem(                       // Replace the list by the one stored in memory
         "shoppingList", 
