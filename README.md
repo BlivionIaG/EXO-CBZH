@@ -11,14 +11,14 @@ Les modifications se font dans `js/global.js`.
 
 - Complétez la fonction `readShoppingListItem()` qui permet d'afficher les articles.
 - Appellez la fonction `readShoppingListItem()` pour afficher les articles lors du chargement de la page.
-- Rajouter dans la fonction `readShoppingListItem()` pour chaque article de la liste un évènement qui se déclenche quand on clique dessus. On gardera l'article en mémoire comme celui selectionné et changera l'état de l'article affiché avec : 
+- Rajoutez dans la fonction `readShoppingListItem()` pour chaque article de la liste, un évènement qui se déclenche quand on clique dessus. On gardera l'article en mémoire comme celui selectionné et on changera l'état de l'article affiché avec : 
     - Etat désactivé : `itemSelected.setAttribute("class","shoppingItem list-group-item input-group");`
     - Etat activé : `itemSelected.setAttribute("class","shoppingItem list-group-item input-group active");`
 
 ## 3) Modification Article dans la liste de courses
 
 - Complétez la fonction `updateShoppingListItem()` pour modifier un article de la liste de course.
-- Modifier l'évènement qui se déclenche lorsque l'on valide la saisie d'un article pour executer la fonction `updateShoppingListItem()` quand on veut modifier un article.
+- Modifiez l'évènement qui se déclenche lorsque l'on valide la saisie d'un article pour executer la fonction `updateShoppingListItem()` quand on veut modifier un article.
 
 ## 4) Suppression Article dans la liste de courses
 
