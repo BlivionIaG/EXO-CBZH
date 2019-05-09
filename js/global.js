@@ -132,17 +132,5 @@ function updateShoppingListItem(){
 }
 
 function deleteShoppingListItem(){
-    let itemId = itemSelected.id.split("_")[1];
-
-    shoppingListCollection.splice(
-        indexOfItemById(shoppingListCollection, itemId), 1
-    );
-    
-    itemSelected = null;
-
-    readShoppingListItem();
-    localStorage.setItem(                       // Replace the list by the one stored in memory
-        "shoppingList", 
-        JSON.stringify(shoppingListCollection)
-    );
+   
 }
