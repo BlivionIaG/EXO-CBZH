@@ -8,14 +8,6 @@ let deleteShoppingListItemButton = document.querySelector("#deleteItemButton"); 
 
 let itemSelected = null;                                                            // Current selected item
 
-addItemToShoppingListForm.addEventListener("submit", (event) => {
-
-});
-
-deleteShoppingListItemButton.addEventListener("click", (event) =>{
-
-});
-
 function indexOfItemById(array, id){
     let i = -1;
     for (let index = 0; index < array.length; index++) {
