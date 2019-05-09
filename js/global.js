@@ -19,11 +19,7 @@ addItemToShoppingListForm.addEventListener("submit", (event) => {
 });
 
 deleteShoppingListItemButton.addEventListener("click", (event) =>{
-    if(itemSelected){
-        if(confirm("Do you want to delete the item "+itemSelected.innerHTML+" ?")){
-            deleteShoppingListItem();
-        }
-    }
+
 });
 
 function indexOfItemById(array, id){
