@@ -12,18 +12,14 @@ readShoppingListItem();
 
 addItemToShoppingListForm.addEventListener("submit", (event) => {
     if(itemSelected){               // If an item is selected
-        updateShoppingListItem();   // We update it
+        
     }else{
         createShoppingListItem();   // We add it
     }
 });
 
 deleteShoppingListItemButton.addEventListener("click", (event) =>{
-    if(itemSelected){
-        if(confirm("Do you want to delete the item "+itemSelected.innerHTML+" ?")){
-            deleteShoppingListItem();
-        }
-    }
+
 });
 
 function indexOfItemById(array, id){
@@ -114,35 +110,9 @@ function readShoppingListItem(){
 }
 
 function updateShoppingListItem(){
-    let item = {
-        id: itemSelected.id.split("_")[1],          // The get the number part of the id (shoppingItem_XX)
-        name: shoppingItemName.value                
-    };
-
-    if(item.name !== ""){                           // If the input fiel isn't empty
-        shoppingListCollection[indexOfItemById(     // Add the item to the memory stored list
-            shoppingListCollection, item.id
-        )] = item;     
-        readShoppingListItem();                     // Refresh the displayed list
-        localStorage.setItem(                       // Replace the list by the one stored in memory
-            "shoppingList", 
-            JSON.stringify(shoppingListCollection)
-        );
-    }
+   
 }
 
 function deleteShoppingListItem(){
-    let itemId = itemSelected.id.split("_")[1];
 
-    shoppingListCollection.splice(
-        indexOfItemById(shoppingListCollection, itemId), 1
-    );
-    
-    itemSelected = null;
-
-    readShoppingListItem();
-    localStorage.setItem(                       // Replace the list by the one stored in memory
-        "shoppingList", 
-        JSON.stringify(shoppingListCollection)
-    );
 }
