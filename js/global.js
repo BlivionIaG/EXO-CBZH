@@ -41,6 +41,8 @@ function searchForHighestIndex(array){
 }
 
 function addShopingListItem(item){
+    shoppingList.innerHTML += "<li style=\"list-style-type:none\" type=\"hidden\"></li>";
+
     let liElement = document.createElement("li");                                   // Creates a <li> tag
     liElement.setAttribute("class", "shoppingItem list-group-item input-group");    // Adds class attributes
     liElement.setAttribute("id", "shoppingItem_"+item.id);                          // Adds id attributes
@@ -67,10 +69,6 @@ function createShoppingListItem(){
 }
 
 function readShoppingListItem(){
-    document.querySelectorAll(".shoppingItem").forEach(element => {                              // And for each of them
-        element.remove();
-    });    // Clear the displayed list
-
     
 }
 
