@@ -1,26 +1,25 @@
 
-let shoppingListCollection = JSON.parse(localStorage.getItem("shoppingList")) || [] // Fetches the saved list or creates an empty array by default
+let shoppingListCollection = JSON.parse(localStorage.getItem("shoppingList")) || [] // On recupère la liste sauvegardée dans le stockage ou on crée une liste vide par défaut
+let addItemToShoppingListForm = document.querySelector("#addItemToShoppingList");   // Emplacement du formaulaire d'entrée de la liste de courses
+let shoppingItemName = document.querySelector("#shoppingItemName");                 // Emplacement du champ de saisie du nom de l'article
+let shoppingList = document.querySelector("#shoppingList");                         // Emplacement de la liste de course affichée
+let deleteShoppingListItemButton = document.querySelector("#deleteItemButton");     // Emplacement du bouton de suppression
 
-let addItemToShoppingListForm = document.querySelector("#addItemToShoppingList");   // Shopping item input form location
-let shoppingItemName = document.querySelector("#shoppingItemName");                 // Item name location
-let shoppingList = document.querySelector("#shoppingList");                         // Shopping list location
-let deleteShoppingListItemButton = document.querySelector("#deleteItemButton");     // Delete shopping list item button location
+let itemSelected = null;                                                            // Article actuellement selectionné (null = pas d'article)
 
-let itemSelected = null;                                                            // Current selected item
+readShoppingListItem(); // On affiche la liste des articles chargé en mémoire
 
-readShoppingListItem();
-
-addItemToShoppingListForm.addEventListener("submit", (event) => {
-    if(itemSelected){               // If an item is selected
-        updateShoppingListItem();   // We update it
-    }else{
-        createShoppingListItem();   // We add it
+addItemToShoppingListForm.addEventListener("submit", (event) => {       // Quand on valide la saisie d'un nom d'article
+    if(itemSelected){               // Si un article est sélectionné
+        updateShoppingListItem();   // On le met à jour
+    }else{                          // Sinon
+        createShoppingListItem();   // On l'ajoute
     }
 });
 
-deleteShoppingListItemButton.addEventListener("click", (event) =>{
-    if(itemSelected){
-        if(confirm("Do you want to delete the item "+itemSelected.innerHTML+" ?")){
+deleteShoppingListItemButton.addEventListener("click", (event) =>{                   // Quand on clique sur la corbeille
+    if(itemSelected){                                                                // Si un article est sélectionné
+        if(confirm("Do you want to delete the item "+itemSelected.innerHTML+" ?")){  // On de
             deleteShoppingListItem();
         }
     }
