@@ -1,11 +1,13 @@
 # Exercice Code BZH
 
-## Ajout Article dans la liste de courses
+Les modifications se font dans `js/global.js`.
+
+## 1) Ajout Article dans la liste de courses
 
 - Completez la fonction `createShoppingListItem()` qui permet d'ajouter un article à la liste de courses.
 - Ajoutez un évènement qui se déclenche lorsque que l'on valide le nom de l'article et qui execute la fonction `createShoppingListItem()`.
 
-## Visualisation Article dans la liste de courses
+## 2) Visualisation Article dans la liste de courses
 
 - Completez la fonction `readShoppingListItem()` qui permet d'afficher les articles.
 - Appellez la fonction `readShoppingListItem()` pour afficher les articles lors du chargement de la page.
@@ -13,12 +15,12 @@
     - Etat désactivé : `itemSelected.setAttribute("class","shoppingItem list-group-item input-group");`
     - Etat activé : `itemSelected.setAttribute("class","shoppingItem list-group-item input-group active");`
 
-## Modification Article dans la liste de courses
+## 3) Modification Article dans la liste de courses
 
 - Completez la fonction `updateShoppingListItem()` pour modifier un article de la liste de course.
 - Modifier l'évènement qui se déclenche lorsque l'on valide la saisie d'un article pour executer la fonction `updateShoppingListItem()` quand on veut modifier un article.
 
-## Suppression Article dans la liste de courses
+## 4) Suppression Article dans la liste de courses
 
 - Completez la fonction `deleteShoppingListItem()` qui permet de supprimer un élément de la liste sélectionné.
 - Ajoutez un évenement qui se déclenche quand on clique sur le bouton supprimer qui execute la fonction `deleteShoppingListItem()`.
