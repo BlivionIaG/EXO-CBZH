@@ -79,7 +79,9 @@ function createShoppingListItem(){
 }
 
 function readShoppingListItem(){
-    shoppingList.innerHTML = "";    // Clear the displayed list
+    document.querySelectorAll(".shoppingItem").forEach(element => {                              // And for each of them
+        element.remove();
+    });    // Clear the displayed list
 
     shoppingListCollection.forEach(element => {     // For each item in the list
         addShopingListItem(element);                // We add it into the displayed list
