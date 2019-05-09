@@ -8,11 +8,9 @@ let deleteShoppingListItemButton = document.querySelector("#deleteItemButton"); 
 
 let itemSelected = null;                                                            // Current selected item
 
-readShoppingListItem();
-
 addItemToShoppingListForm.addEventListener("submit", (event) => {
     if(itemSelected){               // If an item is selected
-        
+
     }else{
         createShoppingListItem();   // We add it
     }
@@ -75,38 +73,7 @@ function createShoppingListItem(){
 }
 
 function readShoppingListItem(){
-    shoppingList.innerHTML = "";    // Clear the displayed list
-
-    shoppingListCollection.forEach(element => {     // For each item in the list
-        addShopingListItem(element);                // We add it into the displayed list
-
-        let displayedShoppingList = document.querySelectorAll(".shoppingItem"); // Then we find the location of every displayed item
-        displayedShoppingList.forEach(element => {                              // And for each of them
-            element.addEventListener("click",                                   // We add an mouse click event listener for them
-                (event) => {
-                    if(element === itemSelected){                       // If the item is already selected
-                        shoppingItemName.value = "";                    // We clear the input
-                        itemSelected.setAttribute("class",              // Unselect the displayed item
-                            "shoppingItem list-group-item input-group"
-                        );
-                        itemSelected = null;                      
-                    }else{                   
-                        shoppingItemName.value=element.innerHTML;           // Copy the name of the item in the input
-                        if(itemSelected) {                                  
-                            itemSelected.setAttribute("class",              // Unselect the displayed item
-                                "shoppingItem list-group-item input-group"
-                            );
-                        }
-                        itemSelected = element;                                 // Set current item as selected
-                        itemSelected.setAttribute("class",                      // Display the item as selected
-                            "shoppingItem list-group-item input-group active"
-                        );
-                    }                    
-                }
-            );
-        });
-        
-    });
+    
 }
 
 function updateShoppingListItem(){
