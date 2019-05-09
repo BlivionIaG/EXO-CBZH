@@ -93,6 +93,13 @@ function readShoppingListItem(){
                         itemSelected.setAttribute("class",              // Unselect the displayed item
                             "shoppingItem list-group-item input-group"
                         );
+
+		                let formContainer = itemSelected.parentNode.parentNode.parentNode;			// Récupération du parent commun à l'élément sélectionné et au bouton à modifier
+		                let formElement = formContainer.querySelector("#addItemToShoppingList");	// Récupération du formulaire
+		                let formButton = formElement.querySelector('input[type="submit"]');			// Récupération du bouton
+
+		                formButton.setAttribute("value", "Créer");								// Modification de la valeur du bouton
+
                         itemSelected = null;                      
                     }else{                   
                         shoppingItemName.value=element.innerHTML;           // Copy the name of the item in the input
@@ -105,7 +112,13 @@ function readShoppingListItem(){
                         itemSelected.setAttribute("class",                      // Display the item as selected
                             "shoppingItem list-group-item input-group active"
                         );
-                    }                    
+
+		                let formContainer = itemSelected.parentNode.parentNode.parentNode;			// Récupération du parent commun à l'élément sélectionné et au bouton à modifier
+		                let formElement = formContainer.querySelector("#addItemToShoppingList");	// Récupération du formulaire
+		                let formButton = formElement.querySelector('input[type="submit"]');			// Récupération du bouton
+
+		                formButton.setAttribute("value", "Modifier");								// Modification de la valeur du bouton
+                    }
                 }
             );
         });
