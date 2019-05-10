@@ -20,6 +20,10 @@ Les modifications se font dans `js/global.js`.
 ## 2) Visualisation Article dans la liste de courses
 
 - Complétez la fonction `readShoppingListItem()` qui permet d'afficher les articles.
+    - Effacez la liste affichée.
+    - Pour chaque articles de la liste en mémoire (`shoppingListCollection`), ajoutez les à la liste affichée avec la fonction `addShopingListItem(votreArticleIci)`.
+    - Récupérez l'emplacement dans le document de tous les <li> de classe `.shoppingItem` (Articles affichés).
+      - Pour chaque article affiché, ajoutez un évènement qui se déclenche lors d'un "click" 
 - Appellez la fonction `readShoppingListItem()` pour afficher les articles lors du chargement de la page.
 - Rajoutez dans la fonction `readShoppingListItem()` pour chaque article de la liste, un évènement qui se déclenche quand on clique dessus. On gardera l'article en mémoire comme celui selectionné et on changera l'état de l'article affiché avec : 
     - Etat désactivé : `itemSelected.setAttribute("class","shoppingItem list-group-item input-group");`
