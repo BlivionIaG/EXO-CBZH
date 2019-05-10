@@ -1,125 +1,118 @@
 
-let shoppingListCollection = JSON.parse(localStorage.getItem("shoppingList")) || [] // Fetches the saved list or creates an empty array by default
+let shoppingListCollection = JSON.parse(localStorage.getItem("shoppingList")) || [] // On recupère la liste sauvegardée dans le stockage ou on crée une liste vide par défaut
+let addItemToShoppingListForm = document.querySelector("#addItemToShoppingList");   // Emplacement du formaulaire d'entrée de la liste de courses
+let shoppingItemName = document.querySelector("#shoppingItemName");                 // Emplacement du champ de saisie du nom de l'article
+let shoppingList = document.querySelector("#shoppingList");                         // Emplacement de la liste de course affichée
+let deleteShoppingListItemButton = document.querySelector("#deleteItemButton");     // Emplacement du bouton de suppression
 
-let addItemToShoppingListForm = document.querySelector("#addItemToShoppingList");   // Shopping item input form location
-let shoppingItemName = document.querySelector("#shoppingItemName");                 // Item name location
-let shoppingList = document.querySelector("#shoppingList");                         // Shopping list location
-let deleteShoppingListItemButton = document.querySelector("#deleteItemButton");     // Delete shopping list item button location
+let itemSelected = null;                                                            // Article actuellement selectionné (null = pas d'article)
 
-let itemSelected = null;                                                            // Current selected item
+readShoppingListItem(); // On affiche la liste des articles chargé en mémoire
 
-readShoppingListItem();
-
-addItemToShoppingListForm.addEventListener("submit", (event) => {
-    if(itemSelected){               // If an item is selected
+addItemToShoppingListForm.addEventListener("submit", (event) => {       // Quand on valide la saisie d'un nom d'article
+    if(itemSelected){               // Si un article est sélectionné
         
-    }else{
-        createShoppingListItem();   // We add it
+    }else{                          // Sinon
+        createShoppingListItem();   // On l'ajoute
     }
 });
 
-function indexOfItemById(array, id){
-    let i = -1;
-    for (let index = 0; index < array.length; index++) {
-        const element = array[index];
-        if(element.id == id){
-            i = index;
+function indexOfItemById(array, id){                        // On récupère la position dans un tableau d'un article avec un identifiant donné
+    let i = -1; // Par défaut on est en dehors du tableau
+    for (let index = 0; index < array.length; index++) {    // On parcours le tableau donné                         
+        if(array[index].id == id){                          // Si l'identifiant de l'article parcouru est le même que l'identifiant donné
+            i = index;                                      // On stocke dans i la position de l'article correspondant
         }
     }
 
-    return i;
+    return i;   // On retourne l'identifiant trouvé
 }
 
-function searchForHighestIndex(array){
-    let id = -1;
+function searchForHighestIndex(array){      // On cherche dans le tableau l'élément qui as l'identifiant le plus grand
+    let id = -1;                            // Par défaut on est en dehors du tableau
 
-    array.forEach(element => {
-        if(element.id > id){
-            id = element.id;
+    array.forEach(element => {              // On parcours le tableau pour chaque élément
+        if(element.id > id){                // Si l'identifiant de l'élément parcouru est plus grand que celui stocké dans id
+            id = element.id;                // On le stocke dans id
         }
     });
 
-    return id;
+    return id;  // On retourne la valeur de l'identifiant le plus grand 
 }
 
-function addShopingListItem(item){
-    shoppingList.innerHTML += "<li style=\"list-style-type:none\" type=\"hidden\"></li>";
+function addShopingListItem(item){     // Ajoute à la liste non ordonnée (<ul>) shoppingList un article
+    /*  Suite à un problème dont je n'ai pas encore la solution, Je ne pouvais pas sélectionner une ligne sur deux.
+        Dans le cas d'un nombre d'article pair, les articles sélectionnables étaient ceux à des positions paires et
+        inversement dans le cas d'un nombre d'articles impair, pour résoudre ce problème rapidement :*/
+    shoppingList.innerHTML += "<li style=\"list-style-type:none\" type=\"hidden\"></li>";  // J'ai ajouté un balise <li> de type "hidden" (caché) avant celle de l'article affiché
+    /* Ce n'est pas une solution très propre mais elle marche, je vais essayer de trouver mieux */ 
 
-    let liElement = document.createElement("li");                                   // Creates a <li> tag
-    liElement.setAttribute("class", "shoppingItem list-group-item input-group");    // Adds class attributes
-    liElement.setAttribute("id", "shoppingItem_"+item.id);                          // Adds id attributes
+    let liElement = document.createElement("li");                                   // On crée une balise <li>
+    liElement.setAttribute("class", "shoppingItem list-group-item input-group");    // On lui des attributs de classe 
+    liElement.setAttribute("id", "shoppingItem_"+item.id);                          // On lui ajoute un identifiant
 
-    liElement.innerHTML = item.name;                                                // Adds the item name inside the <li> tag
+    liElement.innerHTML = item.name;                                                // On rajoute le nom de l'article dans la balise <li>
 
-    shoppingList.appendChild(liElement);                                            // Adds the li tag inside the shoppingList
+    shoppingList.appendChild(liElement);                                            // On rajoute la balise <li> dans la liste non ordonnée (<ul>) shoppingList
 }
 
 function createShoppingListItem(){
     let item = {
-        id: searchForHighestIndex(shoppingListCollection)+1,    // id of the item
-        name: shoppingItemName.value                            // name of the item
-    };
-
-    if(item.name !== ""){                       // If the input fiel isn't empty
-        addShopingListItem(item);               // Add the item to the displayed list
-        shoppingListCollection.push(item);      // Add the item to the memory stored list
-        localStorage.setItem(                   // Replace the list by the one stored in memory
-            "shoppingList", 
-            JSON.stringify(shoppingListCollection)
+        id: searchForHighestIndex(shoppingListCollection)+1,    // Identifiant de l'article
+        name: shoppingItemName.value                            // Nom de l'article
+    }
+    
+    if(item.name !== ""){                       // Si le champ de saisie du nom de l'article n'est pas vide
+        addShopingListItem(item);               // On rajoute l'article à la liste affichée
+        shoppingListCollection.push(item);      // On rajoute l'article à la liste sauvegardée en mémoire
+        localStorage.setItem(                   // On remplace la liste sauvegardée dans le stockage par celle en mémoire
+            "shoppingList",  // Nom (Clé) de la liste en stockage
+            JSON.stringify(shoppingListCollection) // On converti en chaine de charactères au format JSON la liste
         );
     }
 }
 
 function readShoppingListItem(){
-    shoppingList.innerHTML = "";    // Clear the displayed list
+    shoppingList.innerHTML = "";    // On efface la liste affichée 
 
-    shoppingListCollection.forEach(element => {     // For each item in the list
-        addShopingListItem(element);                // We add it into the displayed list
+    shoppingListCollection.forEach(element => {     // On parcours la liste en mémoire pour chaque article
+        addShopingListItem(element);                // On l'ajoute à la liste affichée 
 
-        let displayedShoppingList = document.querySelectorAll(".shoppingItem"); // Then we find the location of every displayed item
-        displayedShoppingList.forEach(element => {                              // And for each of them
-            element.addEventListener("click",                                   // We add an mouse click event listener for them
+        let displayedShoppingList = document.querySelectorAll(".shoppingItem"); // On cherche l'emplacement dans le document affiché de chaque article
+        displayedShoppingList.forEach(element => {                              // Et pour chaque article
+            element.addEventListener("click",                                   // On met un évènement qui se lance quand on clique dessus
                 (event) => {
-                    if(element === itemSelected){                       // If the item is already selected
-                        shoppingItemName.value = "";                    // We clear the input
-                        itemSelected.setAttribute("class",              // Unselect the displayed item
+                    if(element === itemSelected){                       // Si l'article est déjà sélectionné
+                        shoppingItemName.value = "";                    // On efface le champ de saisie
+                        itemSelected.setAttribute("class",              // On déselectionne en mémoire l'article
                             "shoppingItem list-group-item input-group"
                         );
 
-		                let formContainer = itemSelected.parentNode.parentNode.parentNode;			// Récupération du parent commun à l'élément sélectionné et au bouton à modifier
-		                let formElement = formContainer.querySelector("#addItemToShoppingList");	// Récupération du formulaire
-		                let formButton = formElement.querySelector('input[type="submit"]');			// Récupération du bouton
-
-		                formButton.setAttribute("value", "Créer");								// Modification de la valeur du bouton
+		                document.querySelector("#addItemSubmitButton").setAttribute("value", "Créer");	// Modification de la valeur du bouton
 
                         itemSelected = null;                      
                     }else{                   
-                        shoppingItemName.value=element.innerHTML;           // Copy the name of the item in the input
+                        shoppingItemName.value=element.innerHTML;           // On copie le nom de l'article dans le champ de saisie vers le nom de l'élément sélectionné
                         if(itemSelected) {                                  
-                            itemSelected.setAttribute("class",              // Unselect the displayed item
-                                "shoppingItem list-group-item input-group"
+                            itemSelected.setAttribute("class",              // On désélectionne (affichage) l'élément séléctionné
+                                "shoppingItem list-group-item input-group"  // On enlève l'attribut "active" de bootstrap
                             );
                         }
-                        itemSelected = element;                                 // Set current item as selected
-                        itemSelected.setAttribute("class",                      // Display the item as selected
-                            "shoppingItem list-group-item input-group active"
+                        itemSelected = element;                                 // On met l'article sur lequel on a cliqué comme celui actuellement sélectionné
+                        itemSelected.setAttribute("class",                      // On affiche l'article sur lequel on a cliqué comme sélectionné
+                            "shoppingItem list-group-item input-group active"   // On utilise l'attribut "active de bootstrap"
                         );
 
-		                let formContainer = itemSelected.parentNode.parentNode.parentNode;			// Récupération du parent commun à l'élément sélectionné et au bouton à modifier
-		                let formElement = formContainer.querySelector("#addItemToShoppingList");	// Récupération du formulaire
-		                let formButton = formElement.querySelector('input[type="submit"]');			// Récupération du bouton
-
-		                formButton.setAttribute("value", "Modifier");								// Modification de la valeur du bouton
+                        document.querySelector("#addItemSubmitButton").setAttribute("value", "Modifier");  // Modification de la valeur du bouton
                     }
                 }
             );
         });
-        
     });
 }
 
 function updateShoppingListItem(){
-    
+
 }
 
 function deleteShoppingListItem(){
