@@ -125,7 +125,7 @@ function updateShoppingListItem(){
         name: shoppingItemName.value                
     };
 
-    if(item.name !== ""){                           // If the input fiel isn't empty
+    if(item.name !== ""){                           // If the input field isn't empty
         shoppingListCollection[indexOfItemById(     // Add the item to the memory stored list
             shoppingListCollection, item.id
         )] = item;     
