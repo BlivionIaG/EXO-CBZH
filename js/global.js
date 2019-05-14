@@ -1,6 +1,6 @@
 
 let shoppingListCollection = JSON.parse(localStorage.getItem("shoppingList")) || [] // On recupère la liste sauvegardée dans le stockage ou on crée une liste vide par défaut
-let addItemToShoppingListForm = document.querySelector("#addItemToShoppingList");   // Emplacement du formaulaire d'entrée de la liste de courses
+let addItemToShoppingListForm = document.querySelector("#addItemToShoppingList");   // Emplacement du formulaire d'entrée de la liste de courses
 let shoppingItemName = document.querySelector("#shoppingItemName");                 // Emplacement du champ de saisie du nom de l'article
 let shoppingList = document.querySelector("#shoppingList");                         // Emplacement de la liste de course affichée
 let deleteShoppingListItemButton = document.querySelector("#deleteItemButton");     // Emplacement du bouton de suppression

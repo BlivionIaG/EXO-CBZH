@@ -31,11 +31,11 @@ Les modifications se font dans `js/global.js`.
         - Faites en sorte que quand on sélectionne un article, la valeur affichée du bouton `addItemSubmitButton` passe de "Créer" à "Modifier" et inversement. 
 - Appellez la fonction `readShoppingListItem()` pour afficher les articles lors du chargement de la page.
 
-
 ## 3) Modification Article dans la liste de courses
 
+- Modifiez l'évènement qui se déclenche lorsque l'on valide la saisie d'un article pour appeller la fonction `updateShoppingListItem()` quand on veut modifier un article.
 - Complétez la fonction `updateShoppingListItem()` pour modifier un article de la liste de course.
-- Modifiez l'évènement qui se déclenche lorsque l'on valide la saisie d'un article pour executer la fonction `updateShoppingListItem()` quand on veut modifier un article.
+    - Vous pouvez récupérer l'id de l'objet avec `itemSelected.id`, il faudra l'extraire de `shoppingItem_XX`.
 
 ## 4) Suppression Article dans la liste de courses
 
