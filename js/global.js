@@ -37,7 +37,7 @@ function addShopingListItem(item){     // Ajoute à la liste non ordonnée (<ul>
     /* Ce n'est pas une solution très propre mais elle marche, je vais essayer de trouver mieux */ 
 
     let liElement = document.createElement("li");                                   // On crée une balise <li>
-    liElement.setAttribute("class", "shoppingItem list-group-item input-group");    // On lui des attributs de classe 
+    liElement.setAttribute("class", "shoppingItem list-group-item input-group");    // On lui ajoute des attributs de classe 
     liElement.setAttribute("id", "shoppingItem_"+item.id);                          // On lui ajoute un identifiant
 
     liElement.innerHTML = item.name;                                                // On rajoute le nom de l'article dans la balise <li>
