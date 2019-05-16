@@ -47,7 +47,7 @@ function addShopingListItem(item){     // Ajoute à la liste non ordonnée (<ul>
     shoppingList.innerHTML += "<li style=\"list-style-type:none\" type=\"hidden\"></li>";  // J'ai ajouté un balise <li> de type "hidden" (caché) avant celle de l'article affiché
     /* Ce n'est pas une solution très propre mais elle marche, je vais essayer de trouver mieux */ 
 
-    let liElement = document.createElement("li");                                   // On crée une balise <li>
+    let liElement = document.createElement("li");                                   // On créé une balise <li>
     liElement.setAttribute("class", "shoppingItem list-group-item input-group");    // On lui des attributs de classe 
     liElement.setAttribute("id", "shoppingItem_"+item.id);                          // On lui ajoute un identifiant
 
